@@ -1,9 +1,10 @@
-# Fabric Example Mod
+# packwiz Server updater
 
-## Setup
-
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+Updates packwiz serverside
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+Honestly do whatever u want with it
+
+For general enquiries post to: `24 Tiny Tater Avenue, Bradford, BD1 6PJ`
+(p.s. don't acctually post anything there)
