@@ -22,9 +22,6 @@
       "ttt.packwizsu.Packwizsu"
     ]
   },
-  "mixins": [
-    "modid.mixins.json"
-  ],
 
   "depends": {
     "fabricloader": ">=0.7.4",

@@ -2,31 +2,58 @@ package ttt.packwizsu;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
+import ttt.packwizsu.config.ConfigHandler;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 public class Packwizsu implements PreLaunchEntrypoint {
 
-	private final static String PACK_TOML = "https://raw.githubusercontent.com/The-Tiny-Taters/TTT-Creative/main/pack.toml";
-	private final static String SHELL_COMMAND = "java -jar packwiz-installer-bootstrap.jar -g -s server " + PACK_TOML;
+	private static String packToml;
+	public final static File GAME_DIR_FILE = FabricLoader.getInstance().getGameDir().toFile();
 
 	@Override
 	public void onPreLaunch() {
+		ConfigHandler.init();
+
+		if(GAME_DIR_FILE.exists()) {
+			boolean shouldUpdate = Boolean.parseBoolean(ConfigHandler.getValue("should_update"));
+			packToml = ConfigHandler.getValue("pack_toml");
+
+			if(shouldUpdate && packToml.contains("pack.toml")) {
+				updatePackwiz();
+			}
+			else if(shouldUpdate && !packToml.contains("pack.toml")) {
+				Scanner input = new Scanner(System.in);
+				System.out.println("Packwiz pack.toml file link:");
+				packToml = input.nextLine();
+
+				ConfigHandler.setValue("pack_toml", packToml);
+				ConfigHandler.update();
+				updatePackwiz();
+			}
+		}
+	}
+
+	private void updatePackwiz() {
 		boolean isWindows = System.getProperty("os.name")
 				.toLowerCase().startsWith("windows");
 
+		String shellCommand = "java -jar packwiz-installer-bootstrap.jar -g -s server " + packToml;
+
 		ProcessBuilder builder = new ProcessBuilder();
 		if (isWindows) {
-			builder.command("cmd.exe", "/c", SHELL_COMMAND);
+			builder.command("cmd.exe", "/c", shellCommand);
 		}
 		else {
-			builder.command("sh", "-c", SHELL_COMMAND);
+			builder.command("sh", "-c", shellCommand);
 		}
-		builder.directory(FabricLoader.getInstance().getGameDir().toFile());
+		builder.directory(GAME_DIR_FILE);
 
 		try {
 			Process process = builder.start();
