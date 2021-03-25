@@ -6,7 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "ExampleMixin"
+    "ttt.packwizsu.mixin.ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1
