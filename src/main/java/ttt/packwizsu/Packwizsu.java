@@ -2,23 +2,26 @@ package ttt.packwizsu;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ttt.packwizsu.config.ConfigHandler;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 public class Packwizsu implements PreLaunchEntrypoint {
 
+	private static final Logger logger = LogManager.getLogger();
 	private static String packToml;
 	public final static File GAME_DIR_FILE = FabricLoader.getInstance().getGameDir().toFile();
 
 	@Override
 	public void onPreLaunch() {
+		logger.info("======== STARTING PACKWIZ UPDATER ========");
 		ConfigHandler.init();
 
 		if(GAME_DIR_FILE.exists()) {
@@ -29,13 +32,10 @@ public class Packwizsu implements PreLaunchEntrypoint {
 				updatePackwiz();
 			}
 			else if(shouldUpdate && !packToml.contains("pack.toml")) {
-				Scanner input = new Scanner(System.in);
-				System.out.println("Packwiz pack.toml file link:");
-				packToml = input.nextLine();
-
-				ConfigHandler.setValue("pack_toml", packToml);
-				ConfigHandler.update();
-				updatePackwiz();
+				logger.warn("Cannot find a pack.toml file to update packwiz from");
+			}
+			else {
+				logger.info("Packwiz updates are disabled, enable within: packwiz-server-updater.properties");
 			}
 		}
 	}
