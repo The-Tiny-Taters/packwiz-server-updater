@@ -28,13 +28,18 @@ public class Packwizsu implements PreLaunchEntrypoint {
 			boolean shouldUpdate = Boolean.parseBoolean(ConfigHandler.getValue("should_update"));
 			packToml = ConfigHandler.getValue("pack_toml");
 
+			File bootstrapper = new File("packwiz-installer-bootstrap.jar");
+			if(!bootstrapper.exists()) {
+				logger.warn("packwiz-installer-bootstrap.jar isn't found in the root directory for the server");
+			}
+
 			if(shouldUpdate && packToml.contains("pack.toml")) {
 				updatePackwiz();
 			}
 			else if(shouldUpdate && !packToml.contains("pack.toml")) {
 				logger.warn("Cannot find a pack.toml file to update packwiz from");
 			}
-			else {
+			else if(!shouldUpdate){
 				logger.info("Packwiz updates are disabled, enable within: packwiz-server-updater.properties");
 			}
 		}
@@ -57,8 +62,7 @@ public class Packwizsu implements PreLaunchEntrypoint {
 
 		try {
 			Process process = builder.start();
-			StreamConsumer streamConsumer = new StreamConsumer();
-			streamConsumer.init(process.getInputStream(), System.out::println);
+			StreamConsumer streamConsumer = new StreamConsumer(process.getInputStream(), System.out::println);
 			Executors.newSingleThreadExecutor().submit(streamConsumer);
 
 			int exitCode = process.waitFor();
@@ -70,10 +74,10 @@ public class Packwizsu implements PreLaunchEntrypoint {
 	}
 
 	private static class StreamConsumer implements Runnable {
-		private InputStream inputStream;
-		private Consumer<String> consumer;
+		private final InputStream inputStream;
+		private final Consumer<String> consumer;
 
-		public void init(InputStream inputStream, Consumer<String> consumer) {
+		public StreamConsumer(InputStream inputStream, Consumer<String> consumer) {
 			this.inputStream = inputStream;
 			this.consumer = consumer;
 		}
