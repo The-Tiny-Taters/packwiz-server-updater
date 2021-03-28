@@ -15,6 +15,10 @@ Packwiz bootstrapper: https://github.com/comp500/packwiz-installer-bootstrap/rel
 
 If you have a system in place so that the server auto-restarts when the `/stop` command is given you can use the `/restart` command which by default is given to level 2 server operators. To enable set `enable-restarts` to `true` and set a cooldown period in minutes from when the server starts (so players don't randomly spam the command)
 
+## TODO
+
+- More options for the `restart` command
+
 ## License
 
 Honestly do whatever u want with it.
