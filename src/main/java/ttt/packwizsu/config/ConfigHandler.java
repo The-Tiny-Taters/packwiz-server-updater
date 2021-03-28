@@ -16,16 +16,18 @@ public class ConfigHandler {
         // Set defaults
         defaults.setProperty("pack_toml", "");
         defaults.setProperty("should_update", "false");
+        defaults.setProperty("enable_restarts", "false");
+        defaults.setProperty("restart_cooldown", "5");
         configFile = new ConfigFile("packwiz-server-updater", defaults, header);
     }
 
-    public static void setValue(String key, String value)
+    public synchronized static void setValue(String key, String value)
     {
         if(configFile != null) configFile.setPropertyValue(key, value);
     }
 
     @NotNull
-    public static String getValue(String key)
+    public synchronized static String getValue(String key)
     {
         if(configFile != null) {
             return configFile.getPropertyValue(key);
@@ -35,7 +37,7 @@ public class ConfigHandler {
         }
     }
 
-    public static void update() {
+    public synchronized static void update() {
         if(configFile != null)
         {
             configFile.save();

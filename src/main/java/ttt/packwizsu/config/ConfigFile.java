@@ -1,6 +1,6 @@
 package ttt.packwizsu.config;
 
-import ttt.packwizsu.Packwizsu;
+import ttt.packwizsu.PackwizzuPreLaunch;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -17,11 +17,11 @@ public class ConfigFile {
         this.defaults = defaults;
         this.headerComments = headerComments;
 
-        this.file = new File(Packwizsu.GAME_DIR_FILE.toString() + "/" + title + ".properties");
+        this.file = new File(PackwizzuPreLaunch.GAME_DIR_FILE.toString() + "/" + title + ".properties");
 
         try {
-            if(Files.notExists(Packwizsu.GAME_DIR_FILE.toPath())) { // Create the main config directory if it doesn't exist
-                Files.createDirectory(Packwizsu.GAME_DIR_FILE.toPath());
+            if(Files.notExists(PackwizzuPreLaunch.GAME_DIR_FILE.toPath())) { // Create the main config directory if it doesn't exist
+                Files.createDirectory(PackwizzuPreLaunch.GAME_DIR_FILE.toPath());
             }
 
             if(file.createNewFile()) { // Create file & set to defaults if it doesn't exist
