@@ -17,7 +17,7 @@ public class ConfigFile {
         this.defaults = defaults;
         this.headerComments = headerComments;
 
-        this.file = new File(PackwizzuPreLaunch.GAME_DIR_FILE.toString() + "/" + title + ".properties");
+        this.file = new File(PackwizzuPreLaunch.GAME_DIR_FILE + "/" + title + ".properties");
 
         try {
             if(Files.notExists(PackwizzuPreLaunch.GAME_DIR_FILE.toPath())) { // Create the main config directory if it doesn't exist
