@@ -2,50 +2,35 @@ package ttt.packwizsu.config;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigHandler {
 
-    private static ConfigFile configFile;
-    private static final String header = "Packwiz serverside updater";
+    private static final String HEADER = "Packwiz serverside updater";
+    private final ConfigFile configFile;
 
-    public static void init()
-    {
-        Properties defaults = new Properties();
-        defaults.setProperty("pack_toml", "");
-        defaults.setProperty("trigger_update", "false");
-        configFile = new ConfigFile("packwiz-server-updater", defaults, header);
+    public ConfigHandler() {
+        var defaultProperties = new Properties();
+        defaultProperties.setProperty("pack_toml", "");
+        configFile = new ConfigFile("packwiz-server-updater", defaultProperties, HEADER);
     }
 
-    public synchronized static void setValue(String key, String value)
-    {
-        if(configFile != null)
-            configFile.setPropertyValue(key, value);
+    public synchronized void setValue(String key, String value) {
+        configFile.setPropertyValue(key, value);
     }
 
     @NotNull
-    public synchronized static String getValue(String key)
-    {
-        if(configFile != null) {
-            return configFile.getPropertyValue(key);
-        }
-        else {
-            return "";
-        }
+    public synchronized String getValue(String key) {
+        return configFile.getPropertyValue(key);
     }
 
-    public synchronized static void update() {
-        if(configFile != null)
-        {
-            configFile.save();
-            configFile.load();
-        }
+    public synchronized void update() throws Exception {
+        configFile.save();
+        configFile.load();
     }
 
-    public static void ResetToDefaults() {
-        if(configFile != null)
-        {
-            configFile.setToDefaults();
-        }
+    public void resetToDefaults() {
+        configFile.setToDefaults();
     }
 }

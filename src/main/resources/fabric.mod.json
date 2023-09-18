@@ -18,9 +18,6 @@
 
   "environment": "server",
   "entrypoints": {
-    "preLaunch": [
-      "ttt.packwizsu.PackwizzuPreLaunch"
-    ],
     "server": [
       "ttt.packwizsu.Packwizsu"
     ]
