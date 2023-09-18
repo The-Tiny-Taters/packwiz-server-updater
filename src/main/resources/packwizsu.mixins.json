@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ttt.packwizsu.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "server": [
+      "CommandManagerMixin"
+  ],
+
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

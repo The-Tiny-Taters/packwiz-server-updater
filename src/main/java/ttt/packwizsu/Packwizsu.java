@@ -1,7 +1,6 @@
 package ttt.packwizsu;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +18,6 @@ public class Packwizsu implements DedicatedServerModInitializer {
     @Override
     public void onInitializeServer() {
         configHandler = new ConfigHandler();
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment)
-                -> DevCommands.register(dispatcher));
     }
 
     public static ConfigHandler getConfigHandler() {

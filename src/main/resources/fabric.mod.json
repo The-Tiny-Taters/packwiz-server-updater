@@ -6,10 +6,10 @@
   "name": "Packwiz Server updater",
   "description": "Updates packwiz serverside",
   "authors": [
-    "The Tiny Taters"
+    "Sleepy Evelyn"
   ],
   "contact": {
-    "homepage": "",
+    "homepage": "https://modrinth.com/mod/packwiz-server-updater",
     "sources": "https://github.com/The-Tiny-Taters/packwiz-server-updater"
   },
 
@@ -22,10 +22,11 @@
       "ttt.packwizsu.Packwizsu"
     ]
   },
-
   "depends": {
     "fabricloader": ">=0.7.4",
-    "minecraft": "1.20.x",
-    "fabric": "*"
-  }
+    "minecraft": "1.20.x"
+  },
+  "mixins": [
+    "packwizsu.mixins.json"
+  ]
 }
