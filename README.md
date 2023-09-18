@@ -5,7 +5,7 @@ Updates packwiz on a server from a single command.
 ## Usage
 
 - Place the [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases/tag/v0.0.3) in the root directory for your server
-- Use `/packwiz link [URL]` to link to your `pack.toml` file
+- Use `/packwizsu link [URL]` to link to your `pack.toml` file
 - Update the modpack using `/packwizsu update`. This will update the modpack and then shutdown the server
 
 ## Server hosting provider
