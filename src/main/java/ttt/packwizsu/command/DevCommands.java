@@ -12,10 +12,13 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import ttt.packwizsu.Packwizsu;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
@@ -31,6 +34,7 @@ public final class DevCommands {
     private static final MutableText NO_BOOTSTRAPPER = Text.literal("packwiz-installer-bootstrap.jar wasn't found within the root directory of the server").formatted(Formatting.RED);
     private static final MutableText NO_PACK_TOML = Text.literal("There is no pack.toml link to update from. Add this using /packwizsu link [url]").formatted(Formatting.RED);
     private static final MutableText FILE_UPDATE_FAILED = Text.literal("Failed to update the packwiz-server-updater.properties file within the root directory of the server").formatted(Formatting.RED);
+    private static final MutableText PACKWIZ_UPDATE_FAILED = Text.literal("Update command failed. Check the server console for errors").formatted(Formatting.RED);
 
     private static final SimpleCommandExceptionType MALFORMED_URL = new SimpleCommandExceptionType(Text.literal("The link submitted is not a valid URL"));
 
@@ -62,7 +66,7 @@ public final class DevCommands {
             e.printStackTrace();
             commandOutput.sendMessage(FILE_UPDATE_FAILED);
         }
-        getCommandOutput(ctx).sendMessage(UPDATED_TOML_LINK);
+        commandOutput.sendMessage(UPDATED_TOML_LINK);
         return Command.SINGLE_SUCCESS;
     }
 
@@ -75,8 +79,10 @@ public final class DevCommands {
             if(bootstrapper.exists()) {
                 if(packToml.contains("pack.toml")) {
                     commandOutput.sendMessage(RESTART_AND_UPDATE);
-                    updatePackwiz(packToml);
-                    ctx.getSource().getServer().stop(false);
+                    if(updatePackwiz(packToml))
+                        ctx.getSource().getServer().stop(false);
+                    else
+                        commandOutput.sendMessage(PACKWIZ_UPDATE_FAILED);
                 } else
                     commandOutput.sendMessage(NO_PACK_TOML);
             } else
@@ -85,7 +91,7 @@ public final class DevCommands {
         return Command.SINGLE_SUCCESS;
     }
 
-    private static void updatePackwiz(String packToml) {
+    private static boolean updatePackwiz(String packToml) {
         boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
         String shellCommand = "java -jar packwiz-installer-bootstrap.jar -g -s server " + packToml;
 
@@ -95,18 +101,25 @@ public final class DevCommands {
         else
             builder.command("sh", "-c", shellCommand);
 
+        boolean updated = false;
         builder.directory(GAME_DIR_FILE);
 
         try {
             var process = builder.start();
-            var streamConsumer = new StreamConsumer(process.getInputStream(), System.out::println);
-            Executors.newSingleThreadExecutor().submit(streamConsumer);
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.submit(new StreamConsumer(process.getInputStream(), System.out::println));
             int exitCode = process.waitFor();
-            assert exitCode == 0;
+            executor.shutdown();
+
+            if(exitCode == 0)
+                updated = true;
+            else
+                LOGGER.error("Failed to release the packwiz modpack executor thread with exit code: " + exitCode);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+        return updated;
     }
 
     private static CommandOutput getCommandOutput(CommandContext<ServerCommandSource> ctx) {
