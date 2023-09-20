@@ -2,6 +2,13 @@
 
 Updates packwiz on a server from a single command.
 
+![quilt badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/quilt_vector.svg)
+![fabric badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/fabric_vector.svg)
+![forge badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/forge_vector.svg)
+
+### Forge Version
+The forge version requires [Sinytra's Connector](https://modrinth.com/mod/connector) to work properly
+
 ## Usage
 
 - Place the [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases/tag/v0.0.3) in the root directory for your server
