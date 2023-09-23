@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
@@ -54,10 +53,12 @@ public final class DevCommands {
 
     private static int setTomlLink(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         var commandOutput = getCommandOutput(ctx);
+
         try {
             var url = new URL(StringArgumentType.getString(ctx, "url"));
             getConfigHandler().setValue("pack_toml", url.toExternalForm());
             getConfigHandler().update();
+            commandOutput.sendMessage(UPDATED_TOML_LINK);
         }
         catch (MalformedURLException e) {
             throw MALFORMED_URL.create();
@@ -66,23 +67,25 @@ public final class DevCommands {
             e.printStackTrace();
             commandOutput.sendMessage(FILE_UPDATE_FAILED);
         }
-        commandOutput.sendMessage(UPDATED_TOML_LINK);
         return Command.SINGLE_SUCCESS;
     }
 
     private static int restartAndUpdate(CommandContext<ServerCommandSource> ctx) {
         var commandOutput = getCommandOutput(ctx);
         if(GAME_DIR_FILE.exists()) {
-            String packToml = getConfigHandler().getValue("pack_toml");
-            File bootstrapper = new File("packwiz-installer-bootstrap.jar");
+            String packTomlLink = getConfigHandler().getValue("pack_toml");
+            var bootstrapFile = new File("packwiz-installer-bootstrap.jar");
 
-            if(bootstrapper.exists()) {
-                if(packToml.contains("pack.toml")) {
+            if(bootstrapFile.exists()) {
+                if(packTomlLink.contains("pack.toml")) {
                     commandOutput.sendMessage(RESTART_AND_UPDATE);
-                    if(updatePackwiz(packToml))
+                    try {
+                        updatePackwiz(packTomlLink);
                         ctx.getSource().getServer().stop(false);
-                    else
+                    } catch (Exception e) {
+                        e.printStackTrace();
                         commandOutput.sendMessage(PACKWIZ_UPDATE_FAILED);
+                    }
                 } else
                     commandOutput.sendMessage(NO_PACK_TOML);
             } else
@@ -91,35 +94,24 @@ public final class DevCommands {
         return Command.SINGLE_SUCCESS;
     }
 
-    private static boolean updatePackwiz(String packToml) {
+    private static void updatePackwiz(String packTomllink) throws Exception {
         boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
-        String shellCommand = "java -jar packwiz-installer-bootstrap.jar -g -s server " + packToml;
+        String shellCommand = "java -jar packwiz-installer-bootstrap.jar -g -s server " + packTomllink;
 
-        ProcessBuilder builder = new ProcessBuilder();
+        var processBuilder = new ProcessBuilder();
+        processBuilder.directory(GAME_DIR_FILE);
+
         if (isWindows)
-            builder.command("cmd.exe", "/c", shellCommand);
+            processBuilder.command("cmd.exe", "/c", shellCommand);
         else
-            builder.command("sh", "-c", shellCommand);
+            processBuilder.command("sh", "-c", shellCommand);
 
-        boolean updated = false;
-        builder.directory(GAME_DIR_FILE);
+        var process = processBuilder.start();
+        var executorService = Executors.newSingleThreadExecutor();
 
-        try {
-            var process = builder.start();
-            ExecutorService executor = Executors.newSingleThreadExecutor();
-            executor.submit(new StreamConsumer(process.getInputStream(), System.out::println));
-            int exitCode = process.waitFor();
-            executor.shutdown();
-
-            if(exitCode == 0)
-                updated = true;
-            else
-                LOGGER.error("Failed to release the packwiz modpack executor thread with exit code: " + exitCode);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return updated;
+        executorService.submit(new StreamConsumer(process.getInputStream(), System.out::println));
+        process.waitFor();
+        executorService.shutdown();
     }
 
     private static CommandOutput getCommandOutput(CommandContext<ServerCommandSource> ctx) {

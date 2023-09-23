@@ -18,6 +18,11 @@ public class Packwizsu implements DedicatedServerModInitializer {
     @Override
     public void onInitializeServer() {
         configHandler = new ConfigHandler();
+
+        if(configHandler.getValue("pack_toml").isEmpty())
+            LOGGER.info("Packwiz Server Updater loaded without a pack.toml file to update from");
+        else
+            LOGGER.info("Packwiz Server Updater loaded with pack.toml link: " + configHandler.getValue("pack_toml"));
     }
 
     public static ConfigHandler getConfigHandler() {

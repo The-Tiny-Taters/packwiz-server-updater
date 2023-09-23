@@ -44,9 +44,9 @@ public class ConfigFile {
         if(file.createNewFile()) { // If no file currently exists
             setToDefaults();
         } else {
-            InputStream input = new FileInputStream(file);
+            var inputStream = new FileInputStream(file);
             properties = new Properties();
-            properties.load(input);
+            properties.load(inputStream);
         }
     }
 
