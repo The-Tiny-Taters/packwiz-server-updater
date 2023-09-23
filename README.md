@@ -1,6 +1,6 @@
 # Packwiz server updater
 
-Updates packwiz on a server from a single command.
+Updates Packwiz modpacks for a server using simple commands.
 
 ![quilt badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/quilt_vector.svg)
 ![fabric badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/fabric_vector.svg)
@@ -8,6 +8,10 @@ Updates packwiz on a server from a single command.
 
 ### Forge Version
 The forge version requires [Sinytra's Connector](https://modrinth.com/mod/connector) to work properly
+
+## Downloads
+
+Available only on Modrinth: https://modrinth.com/mod/packwiz-server-updater
 
 ## Usage
 
@@ -17,9 +21,10 @@ The forge version requires [Sinytra's Connector](https://modrinth.com/mod/connec
 
 ## Server hosting provider
 
-If you are using this mod on anything other than a dedicated server which you own yourself, please check with your hosting provider if you are allowed to install this mod. This is because it may violate your provider's TOS by remotely downloading files from a location you specify.
+If you do not own the physical server yourself please check with your hosting provider that they will allow custom startup arguments to be executed and download files remotely using packwiz. If you aren't sure just send a link to this mod in a support ticket.
 
-It should be noted Packwiz is designed to do this safely by using a hashing algorithm to determine if a file is valid or not but your server host may not know this or understand where the files are coming from if you don't tell them.
+----
+
 
 ## License
 
