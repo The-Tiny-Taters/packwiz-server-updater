@@ -11,7 +11,7 @@ The forge version requires [Sinytra's Connector](https://modrinth.com/mod/connec
 
 ## Downloads
 
-Available only on Modrinth: https://modrinth.com/mod/packwiz-server-updater
+Available exclusively on Modrinth: https://modrinth.com/mod/packwiz-server-updater
 
 ## Usage
 
