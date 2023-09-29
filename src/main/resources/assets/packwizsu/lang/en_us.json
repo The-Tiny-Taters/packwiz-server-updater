@@ -1,8 +1,0 @@
-{
-  "message.packwizsu.restart_and_update": "Updating the packwiz modpack and shutting down the server",
-  "message.packwizsu.no_bootstrapper": "packwiz-installer-bootstrap.jar wasn't found within the root directory of the server",
-  "message.packwizsu.no_pack_toml": "There is no pack.toml link to update from. Add this using /packwizsu link [url]",
-  "message.packwizsu.updated_toml_link": "Successfully linked a Packwiz modpack! Use /packwizsu update for the changes to take effect",
-  "message.packwizsu.exception.file_update_failed": "Failed to update the packwiz-server-updater.properties file within the root directory of the server",
-  "message.packwizsu.exception.malformed_url": "The link submitted is not a valid URL"
-}
