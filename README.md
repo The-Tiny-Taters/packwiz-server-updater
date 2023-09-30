@@ -1,17 +1,13 @@
 # Packwiz server updater
 
-Updates Packwiz modpacks for a server using simple commands.
+Updates packwiz modpacks for a server using simple commands.
+
 
 ![quilt badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/quilt_vector.svg)
 ![fabric badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/fabric_vector.svg)
-![forge badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/forge_vector.svg)
 
 ### Forge Version
-The forge version requires [Sinytra's Connector](https://modrinth.com/mod/connector) to work properly
-
-## Downloads
-
-Available exclusively on Modrinth: https://modrinth.com/mod/packwiz-server-updater
+Certain versions may work with Forge if [Sinytra's Connector](https://modrinth.com/mod/connector) is available for that version. This must be installed alongside the mod
 
 ## Usage
 
