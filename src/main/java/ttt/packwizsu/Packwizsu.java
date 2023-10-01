@@ -5,12 +5,9 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ttt.packwizsu.command.DevCommands;
 import ttt.packwizsu.config.ConfigHandler;
 
 import java.io.File;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class Packwizsu implements DedicatedServerModInitializer {
 
