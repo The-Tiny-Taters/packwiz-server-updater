@@ -13,8 +13,7 @@ Certain versions may work with Forge if [Sinytra's Connector](https://modrinth.c
 
 - Place the [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases/tag/v0.0.3) in the root directory for your server
 - Use `/packwizsu link [URL]` to link to your `pack.toml` file
-- Update the modpack using `/packwizsu update`. This will update the modpack and then shutdown the server
-
+- Update the modpack using `/packwizsu update`
 ## Server hosting provider
 
 If you do not own the physical server yourself please check with your hosting provider that they will allow custom startup arguments to be executed and download files remotely using packwiz. If you aren't sure just send a link to this mod in a support ticket.
