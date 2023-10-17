@@ -5,6 +5,7 @@ Updates packwiz modpacks for a server using simple commands.
 
 ![quilt badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/quilt_vector.svg)
 ![fabric badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/fabric_vector.svg)
+[![modrinth badge](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/packwiz-server-updater)
 
 ### Forge Version
 Certain versions may work with Forge if [Sinytra's Connector](https://modrinth.com/mod/connector) is available for that version. This must be installed alongside the mod
@@ -19,7 +20,6 @@ Certain versions may work with Forge if [Sinytra's Connector](https://modrinth.c
 If you do not own the physical server yourself please check with your hosting provider that they will allow custom startup arguments to be executed and download files remotely using packwiz. If you aren't sure just send a link to this mod in a support ticket.
 
 ----
-
 
 ## License
 
