@@ -21,6 +21,3 @@ If you do not own the physical server yourself please check with your hosting pr
 
 ----
 
-## License
-
-Honestly do whatever you want with it.
