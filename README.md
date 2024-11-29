@@ -5,19 +5,13 @@ Updates packwiz modpacks for a server using simple commands.
 [![modrinth badge](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/packwiz-server-updater)
 ![quilt badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/quilt_vector.svg)
 ![fabric badge](https://raw.githubusercontent.com/intergrav/devins-badges/1aec26abb75544baec37249f42008b2fcc0e731f/assets/cozy/supported/fabric_vector.svg)
-
+![forge badge](https://raw.githubusercontent.com/intergrav/devins-badges/c7fd18efdadd1c3f12ae56b49afd834640d2d797/assets/cozy/supported/forge_vector.svg)
 
 ### Forge Version
-Certain versions may work with Forge if [Sinytra's Connector](https://modrinth.com/mod/connector) is available for that version. This must be installed alongside the mod
+The Forge version works if you install [Sinytra's Connector](https://modrinth.com/mod/connector) alongside this mod
 
 ## Usage
-
-- Place the [packwiz-installer-bootstrap.jar](https://github.com/packwiz/packwiz-installer-bootstrap/releases/tag/v0.0.3) in the root directory for your server
-- Use `/packwizsu link [URL]` to link to your `pack.toml` file
-- Update the modpack using `/packwizsu update`
-## Server hosting provider
-
-If you do not own the physical server yourself please check with your hosting provider that they will allow custom startup arguments to be executed and download files remotely using packwiz. If you aren't sure just send a link to this mod in a support ticket.
-
-----
+- Make a [Packwiz modpack](https://packwiz.infra.link/)
+- Use `/packwiz link [URL]` in-game to link to your `pack.toml` file
+- Update the modpack using `/packwiz update`
 
