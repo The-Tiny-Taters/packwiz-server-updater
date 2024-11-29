@@ -1,4 +1,4 @@
-package ttt.packwizsu.mixin;
+package sleepy_evelyn.packwizsu.mixin;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.command.CommandRegistryAccess;
@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import ttt.packwizsu.command.PackwizsuCommands;
+import sleepy_evelyn.packwizsu.command.PackwizsuCommands;
 
 @Mixin(CommandManager.class)
 public abstract class CommandManagerMixin {

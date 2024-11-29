@@ -1,11 +1,11 @@
-package ttt.packwizsu.mixin;
+package sleepy_evelyn.packwizsu.mixin;
 
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import ttt.packwizsu.command.PackwizsuCommands;
+import sleepy_evelyn.packwizsu.command.PackwizsuCommands;
 
 import java.util.function.BooleanSupplier;
 

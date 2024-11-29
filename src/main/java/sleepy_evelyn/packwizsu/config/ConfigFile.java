@@ -1,12 +1,12 @@
-package ttt.packwizsu.config;
+package sleepy_evelyn.packwizsu.config;
 
-import ttt.packwizsu.Packwizsu;
+import sleepy_evelyn.packwizsu.Packwizsu;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.util.Properties;
 
-import static ttt.packwizsu.Packwizsu.GAME_DIR_FILE;
+import static sleepy_evelyn.packwizsu.Packwizsu.GAME_DIR_FILE;
 
 public class ConfigFile {
 

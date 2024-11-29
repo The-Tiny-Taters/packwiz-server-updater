@@ -1,11 +1,11 @@
-package ttt.packwizsu;
+package sleepy_evelyn.packwizsu;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ttt.packwizsu.config.ConfigHandler;
+import sleepy_evelyn.packwizsu.config.ConfigHandler;
 
 import java.io.File;
 
@@ -21,7 +21,8 @@ public class Packwizsu implements DedicatedServerModInitializer {
     public void onInitializeServer() {
         configHandler = new ConfigHandler();
 
-        if(configHandler.getValue("pack_toml").isEmpty())
+        String packToml = configHandler.getValue("pack_toml");
+        if(packToml == null || packToml.isEmpty())
             LOGGER.info("Packwiz Server Updater loaded without a pack.toml file to update from");
         else
             LOGGER.info("Packwiz Server Updater loaded with pack.toml link: " + configHandler.getValue("pack_toml"));

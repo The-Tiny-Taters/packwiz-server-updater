@@ -19,7 +19,7 @@
   "environment": "server",
   "entrypoints": {
     "server": [
-      "ttt.packwizsu.Packwizsu"
+      "sleepy_evelyn.packwizsu.Packwizsu"
     ]
   },
   "depends": {
